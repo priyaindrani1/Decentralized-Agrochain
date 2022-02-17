@@ -1,0 +1,57 @@
+pragma solidity 0.5.1;
+
+contract StructStorage {
+
+    
+          
+         
+         mapping (uint => farmer) f1;
+         mapping (uint => lot) l1;
+
+        struct farmer {
+        
+            uint fid;
+            string fname;
+            string location;
+            string cropName;
+            uint256 contact;
+            uint quantity;
+            uint expectedPrice;
+        }
+        struct lot {
+
+            uint lotno;
+            string grade;
+            uint price;
+            string testdate;
+            string expireDate;
+        }
+        address public tester;
+        address owner;
+
+
+
+
+
+
+        function produce(uint farmerId, string memory name, string memory location, string memory cropName, uint256 contact, uint quantity, uint expectedPrice) public{
+                    
+                f1[farmerId]= farmer(farmerId,name,location,cropName,contact,quantity,expectedPrice);
+                
+        }
+        
+        function getproduce(uint se) public view returns(uint,string memory,string memory,string memory,uint256,uint,uint) {
+                 return (f1[se].fid,f1[se].fname,f1[se].location,f1[se].cropName,f1[se].contact,f1[se].quantity,f1[se].expectedPrice);
+             }
+
+             
+        function quality(uint lotno,string memory grade,uint price,string memory testdate,string memory expireDate) public{
+    
+                l1[lotno]=lot(lotno, grade, price, testdate,expireDate);
+  
+        }  
+        function getquality(uint k) public view returns(uint,string memory,uint,string memory,string memory) {
+            return(l1[k].lotno,l1[k].grade,l1[k].price,l1[k].testdate,l1[k].expireDate);
+            
+        }
+}
